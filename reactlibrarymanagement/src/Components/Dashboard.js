@@ -47,7 +47,6 @@ function Dashboard(props) {
       console.error("Error fetching orders:", error);
     }
   };
-
   const getAllBooks = async () => {
     try {
       const response = await axios.get("https://localhost:7247/api/Books");
@@ -56,12 +55,15 @@ function Dashboard(props) {
       console.error("Error fetching books:", error);
     }
   };
-
   const handleApplyClick = (bookId, bookTitle, author) => {
     setSelectedBookId(bookId);
     setSelectedBookTitle(bookTitle);
     setSelectedauthor(author);
-    navigate(`/OrderForm`, { state: { bookId, bookTitle } });
+    if(isLoggedIn){
+    navigate(`/OrderForm`, { state: { bookId, bookTitle } });}
+    else{
+      navigate("/Login")
+    }
   };
 
   const handleSearchChange = (event) => {
@@ -125,7 +127,7 @@ function Dashboard(props) {
                       }
                 </p>
                 <div className="book-buttons">
-                  {isLoggedIn &&
+                  {
                     book.quantity - (approvedCounts[book.id] || 0) > 0 && (
                       <button
                         onClick={() => handleApplyClick(book.id, book.title)}
