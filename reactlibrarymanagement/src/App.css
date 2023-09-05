@@ -1,0 +1,162 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #535860;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* UserList.css */
+.user-list-container {
+  margin: 20px;
+}
+
+.blocked-button{
+  padding: 6px 10px;
+  border: none;
+  background-color: #d3ecd4;
+  color: #fff;
+  cursor: pointer;
+}
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.user-table th, .user-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-table th {
+  background-color: #f2f2f2;
+}
+
+.user-table tr:hover {
+  background-color: #f9f9f9;
+}
+.unblocked-button{
+  background-color: rgba(135, 244, 51, 0.655);
+  color: white; 
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+.blocked-button{
+  background-color: red;
+  color: white; 
+  /* border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; */
+}
+
+/* .user-table button:hover {
+  background-color: #45a049;
+} */
+
+.user-table button:disabled {
+  background-color: #253f81;
+  cursor: not-allowed;
+}
+
+h2 {
+  margin-bottom: 16px;
+}
+.button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  padding: 4px 16px;
+  border: none;
+  border-radius: 2px;
+  background-color: #62ec6b;
+  color: #2f2a2a;
+  font-size: 16px;
+  font-weight: italic;
+  cursor: pointer;
+  
+  /* Add any other styles for your button here */
+}
+
+
+/* Styling for button on active/pressed state */
+.button:active {
+  background-color: #003c80;
+} */
+/* OrdersComponent.css */
+.orders-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table th,
+.orders-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.orders-table img {
+  max-width: 100%;
+  max-height: 200px;
+  display: block; /* To remove any extra space below the image */
+  margin: 0 auto; /* Center the image horizontally */
+}
+
+.orders-table hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+.logout-container {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.MyProfile-container {
+  position: absolute;
+  top: 5px;
+  right: 110px;
+}
