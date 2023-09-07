@@ -5,10 +5,6 @@ namespace LibraryManagementSystemTask.Models.DtoMapping
 {
     public class MappingProfile:Profile
     {
-        public MappingProfile() {
-
-            CreateMap<Orders, ordersdto>().ReverseMap();
-        
-        }
+        public MappingProfile() { CreateMap<Orders, ordersdto>().ReverseMap();}
     }
 }

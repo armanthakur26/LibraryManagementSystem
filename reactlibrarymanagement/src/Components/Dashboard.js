@@ -10,7 +10,6 @@ function Dashboard(props) {
   const [returnTimes, setReturnTimes] = useState({});
   const [selectedBookId, setSelectedBookId] = useState(null);
   const [selectedBookTitle, setSelectedBookTitle] = useState(null);
-  const [selectauthor, setSelectedauthor] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,15 +22,12 @@ function Dashboard(props) {
     try {
       const response = await axios.get("https://localhost:7247/api/Orders");
       const ordersData = response.data;
-
       const calculatedApprovedCounts = {};
       const calculatedReturnTimes = {};
-
       ordersData.forEach((order) => {
         if (order.isApproved) {
           const bookId = order.bookId;
           calculatedApprovedCounts[bookId] =(calculatedApprovedCounts[bookId] || 0) + 1;
-
           if (
             !calculatedReturnTimes[bookId] ||
             order.retrunOn < calculatedReturnTimes[bookId]
@@ -40,7 +36,6 @@ function Dashboard(props) {
           }
         }
       });
-
       setApprovedCounts(calculatedApprovedCounts);
       setReturnTimes(calculatedReturnTimes);
     } catch (error) {
@@ -55,10 +50,9 @@ function Dashboard(props) {
       console.error("Error fetching books:", error);
     }
   };
-  const handleApplyClick = (bookId, bookTitle, author) => {
+  const handleApplyClick = (bookId, bookTitle) => {
     setSelectedBookId(bookId);
     setSelectedBookTitle(bookTitle);
-    setSelectedauthor(author);
     if(isLoggedIn){
     navigate(`/OrderForm`, { state: { bookId, bookTitle } });}
     else{
@@ -84,9 +78,7 @@ function Dashboard(props) {
     const options = { year: "numeric", month: "numeric", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
-
   const isLoggedIn = !!localStorage.getItem("token");
-
   return (
     <div className="dashboard-container">
       <div style={searchBarStyle}>
@@ -111,13 +103,12 @@ function Dashboard(props) {
               />
               <div style={bookDetailsStyle}>
                 <p style={bookTitleStyle}>
-                  Name
+                  Name...
                   <i class="fas fa-book" />:{book.title}
                 </p>
                 <p style={bookAuthorStyle}>by {book.author}</p>
-                <p style={bookPriceStyle}>Price: ₹{book.price}</p>
+                <p style={bookPriceStyle}>Price: ${book.price}</p>
                 <p style={bookCategoryStyle}>Category: {book.category}</p>
-
                 <p style={bookCategoryStyle}>
                   {book.quantity - (approvedCounts[book.id] || 0) === 0|| book.quantity - (approvedCounts[book.id] || 0) < 0
                     ? returnTimes[book.id]
@@ -129,9 +120,7 @@ function Dashboard(props) {
                 <div className="book-buttons">
                   {
                     book.quantity - (approvedCounts[book.id] || 0) > 0 && (
-                      <button
-                        onClick={() => handleApplyClick(book.id, book.title)}
-                      >
+                      <button style={applybutton} onClick={() => handleApplyClick(book.id, book.title)} >
                         Apply
                       </button>
                     )}
@@ -157,7 +146,6 @@ const searchinnerStyle = {
   borderRadius: "4px",
   border: "1px solid #ccc",
 };
-
 const sortButtonStyle = {
   padding: "8px 16px",
   background: "#0066cc",
@@ -166,14 +154,12 @@ const sortButtonStyle = {
   borderRadius: "4px",
   cursor: "pointer",
 };
-
 const bookListStyle = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
   gap: "20px",
   padding: "20px",
 };
-
 const bookCardStyle = {
   background: "#f9f9f9",
   borderRadius: "8px",
@@ -213,5 +199,10 @@ const bookPriceStyle = {
 const bookCategoryStyle = {
   fontSize: "16px",
 };
-
+const applybutton = {
+  background: "#f0c14b",
+  borderRadius:"10px",
+ paddingLeft: "20px",
+ paddingRight:"20px",
+  };
 export default Dashboard;

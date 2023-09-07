@@ -12,7 +12,6 @@ const RegistrationForm = () => {
     event.preventDefault();
 
     try {
-      
       const response = await axios.post('https://localhost:7247/api/User/register', {
         firstName,
         lastName,
@@ -86,7 +85,6 @@ const registeruser = () => {
                       placeholder="Enter your LastName"
                     />
                   </div>
-
                   <div className="mb-4">
                     <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <input
@@ -98,7 +96,6 @@ const registeruser = () => {
                       placeholder="Email"
                     />
                   </div>
-
                   <div className="mb-4">
                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                     <input
@@ -109,7 +106,6 @@ const registeruser = () => {
                       placeholder="Enter your Mobile no."
                     />
                   </div>
-
                   <button  type="submit" className="btn btn-outline-primary m-1">
                     Register
                   </button>
@@ -126,27 +122,6 @@ const registeruser = () => {
             </div>
           </div>
         </div>
-        {/* {showSuccessPopup && (
-        <div
-          className="position-fixed top-0 bottom-0 start-0 end-0 d-flex justify-content-center align-items-center"
-          style={{ background: 'rgba(0, 0, 0, 0.5)' }}
-        >
-          <div
-            className="card text-black p-4"
-            style={{ borderRadius: '10px', background: 'rgba(255, 255, 255, 0.8)' }}
-          >
-            <p className="h4 fw-bold mb-3 text-center">Email sent to your id</p>
-            <button
-              type="button"
-              className="btn btn-outline-primary mx-auto d-block"
-              onClick={handleClosePopup}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )} */}
-  
       </section>
     </form>
   );

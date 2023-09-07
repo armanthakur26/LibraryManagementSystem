@@ -11,12 +11,8 @@ namespace LibraryManagementSystemTask.Models
         public string Category { get; set; } = string.Empty;
         public float Price { get; set; } = 0;
         public bool Ordered { get; set; } = false;
-
-
         public string Image { get; set; }
         public int Quantity { get; set; } = 0;
-      
         public bool IsDeleted { get; set; }
-
     }
 }

@@ -1,4 +1,3 @@
-
 // import { useLocation ,useNavigate} from 'react-router-dom';
 //  import React, { useState, useEffect } from "react";
 //  import axios from "axios";
@@ -160,8 +159,6 @@
 // };
 // export default OrderForm;
 
-
-
 import { useLocation, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -201,7 +198,6 @@ const OrderForm = () => {
     const selectedReturnDate = new Date(e.target.value);
     const maxReturnDate = new Date(createdDate);
     maxReturnDate.setDate(maxReturnDate.getDate() + 10);
-
     if (selectedReturnDate > maxReturnDate) {
       const formattedMaxReturnDate = maxReturnDate.toISOString().slice(0, 16);
       setReturnDate(formattedMaxReturnDate);
@@ -214,7 +210,6 @@ const OrderForm = () => {
 
   const handleOrderSubmit = () => {
     if (validationError) {
-      
       return;
     }
 
@@ -330,5 +325,5 @@ const OrderForm = () => {
     </div>
   );
 };
-
 export default OrderForm;
+

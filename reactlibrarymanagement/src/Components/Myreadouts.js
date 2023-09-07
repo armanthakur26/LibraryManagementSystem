@@ -71,7 +71,6 @@ const Myreadouts = () => {
     const date = new Date(dateString);
     return date.toLocaleDateString();
   };
-
   return (
     <div className="orders-container">
       <h1>My Orders</h1>
@@ -101,5 +100,4 @@ const Myreadouts = () => {
     </div>
   );
 };
-
 export default Myreadouts;

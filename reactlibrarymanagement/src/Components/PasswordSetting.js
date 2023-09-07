@@ -11,17 +11,13 @@ const PasswordSetting = () => {
   const [lowercaseError, setLowercaseError] = useState('');
   const [specialSymbolError, setSpecialSymbolError] = useState('');
   const [numericValueError, setNumericValueError] = useState('');
-  const { id } = useParams();
+  const { id} = useParams();
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-
   const delay = 1000;
-
   useEffect(() => {
-    // Validate password match when 'confirmPassword' changes after a delay
     const timer = setTimeout(passwordMatchValidator, delay);
     return () => clearTimeout(timer);
-  }, [confirmPassword]); // Only include 'confirmPassword' as a dependency
-
+  }, [confirmPassword]);
   const passwordMatchValidator = () => {
     if (confirmPassword && password !== confirmPassword) {
       setPasswordMatchError('Password does not match');
@@ -29,15 +25,11 @@ const PasswordSetting = () => {
       setPasswordMatchError('');
     }
   };
-
   const handleClosePopup = () => {
     setShowSuccessPopup(false);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!passwordPattern.test(password)) {
       setLengthError(password.length < 8 ? 'Password must be at least 8 characters long.' : '');
@@ -47,7 +39,6 @@ const PasswordSetting = () => {
       setNumericValueError(password.search(/\d/) === -1 ? 'Password must contain at least one numeric value.' : '');
       return;
     }
-
     if (password !== confirmPassword) {
       setPasswordMatchError("Your Password doesn't match with confirm password");
     } else {
@@ -57,24 +48,18 @@ const PasswordSetting = () => {
           const id = urlParams.get('id');
           return id;
         };
-
-        // Get the ID from the URL
         const idFromUrl = getIdFromUrl();
         console.log('ID from URL:', idFromUrl);
-
         await axios.put(`https://localhost:7247/api/User/update?id=${id}`,{
           id: idFromUrl,
           password: password,
         });
         setShowSuccessPopup(true);
-  
       } catch (error) {
         console.error('Error setting password:', error.message);
-    
       }
     }
   };
-
   return (
     <div style={{ maxWidth: '400px', margin: '0 auto' }}>
       <h2 style={{ textAlign: 'center' }}>Set Your Password</h2>
@@ -164,5 +149,4 @@ const PasswordSetting = () => {
     </div>
   );
 };
-
 export default PasswordSetting;
