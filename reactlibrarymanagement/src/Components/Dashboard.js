@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 function Dashboard(props) {
   const [books, setBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredBooks, setFilteredBooks] = useState([]);
   const [approvedCounts, setApprovedCounts] = useState({});
   const [returnTimes, setReturnTimes] = useState({});
   const [selectedBookId, setSelectedBookId] = useState(null);
@@ -15,7 +14,6 @@ function Dashboard(props) {
   useEffect(() => {
     getAllBooks();
     fetchOrdersAndCalculateCounts();
-    filterBooks();
   }, [searchQuery, books]);
   
   const fetchOrdersAndCalculateCounts = async () => {
@@ -59,20 +57,7 @@ function Dashboard(props) {
       navigate("/Login")
     }
   };
-
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
-
-  const filterBooks = () => {
-    const lowerCaseSearchQuery = searchQuery.toLowerCase().trim();
-    const filtered = books.filter(
-      (book) =>
-        book.title.toLowerCase().includes(lowerCaseSearchQuery) ||
-        book.author.toLowerCase().includes(lowerCaseSearchQuery)
-    );
-    setFilteredBooks(filtered);
-  };
+  const filterBooks=books.filter((e)=>e.title.toLowerCase().includes(searchQuery.toLowerCase())||e.author.toLowerCase().includes(searchQuery.toLowerCase()));
 
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "numeric", day: "numeric" };
@@ -86,15 +71,15 @@ function Dashboard(props) {
           type="text"
           placeholder="Search by book title or author"
           value={searchQuery}
-          onChange={handleSearchChange}
+          onChange={(e)=>setSearchQuery(e.target.value)}
           style={searchinnerStyle}
         />
       </div>
       <div style={bookListStyle}>
-        {filteredBooks.length === 0 ? (
+        {filterBooks.length === 0 ? (
           <p className="text-danger center">No results found</p>
         ) : (
-          filteredBooks.map((book) => (
+          filterBooks.map((book) => (
             <div key={book.id} style={bookCardStyle}>
               <img
                 src={book.image}
