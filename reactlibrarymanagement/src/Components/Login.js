@@ -31,7 +31,6 @@ const Login = () => {
     }
 
     const AuthService = {
-
       login: (user) => axios.post(`https://localhost:7247/api/User/authenticate`, user),
     };
     try {

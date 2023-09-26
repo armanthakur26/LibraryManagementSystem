@@ -42,3 +42,30 @@ function About() {
 }
 
 export default About;
+// import React, { useState, useEffect } from 'react';
+
+// function BookRatings() {
+//   const [ratings, setRatings] = useState([]);
+  
+//   useEffect(() => {
+//     fetch('https://localhost:7247/api/Rating/BookidUserId/6?userId=2')
+//       .then(response => response.json())
+//       .then(data => setRatings(data))
+//       .catch(error => console.error('Error fetching data:', error));
+//   }, []);
+
+//   return (
+//     <div>
+//       <h1>Book Ratings</h1>
+//       <ul>
+//         {ratings.map(rating => (
+//           <li key={rating.bookId}>
+//             Book ID: {rating.bookId}, Rating Value: {rating.booksratingValue},userid:{rating.userId}
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// export default BookRatings;

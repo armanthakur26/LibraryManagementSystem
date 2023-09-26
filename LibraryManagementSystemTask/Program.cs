@@ -1,5 +1,6 @@
 using LibraryManagementSystemTask;
 using LibraryManagementSystemTask.Data;
+using LibraryManagementSystemTask.Models;
 using LibraryManagementSystemTask.Models.DtoMapping;
 using LibraryManagementSystemTask.Repository;
 using LibraryManagementSystemTask.Repository.IRepository;
@@ -23,6 +24,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IBooks , Booksrepository>();
 builder.Services.AddScoped<Iuser, UserRepository>();
 builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
+builder.Services.AddScoped<IBookrating, Ratingrepository>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.Configure<EmailSetting>(builder.Configuration.GetSection("EmailSetting"));

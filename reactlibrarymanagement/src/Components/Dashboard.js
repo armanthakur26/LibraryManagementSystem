@@ -6,16 +6,37 @@ function Dashboard(props) {
   const [books, setBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [approvedCounts, setApprovedCounts] = useState({});
-  const [returnTimes, setReturnTimes] = useState({});
+  const [returnTimes, setReturnTimes] = useState({}); 
   const [selectedBookId, setSelectedBookId] = useState(null);
   const [selectedBookTitle, setSelectedBookTitle] = useState(null);
   const navigate = useNavigate();
-
+  const [average, setAverage] = useState([]);
   useEffect(() => {
     getAllBooks();
     fetchOrdersAndCalculateCounts();
+    AverageRatings();
   }, [searchQuery, books]);
+
+const AverageRatings = async () => {
+  try {
+    const response = await axios.get("https://localhost:7247/api/Rating");
+    const ratingsData = response.data;
+    const calculatedAverageRatings = [];
+    books.forEach((book) => {
+      const bookRatings = ratingsData.filter((e) => e.bookId === book.id);
+      if (bookRatings.length > 0) {
+        const totalRating = bookRatings.reduce((sum, e) => sum + e.booksratingValue, 0);
+        calculatedAverageRatings[book.id] = totalRating / bookRatings.length;
+      }
+    });
+    setAverage(calculatedAverageRatings);
+  } catch (error) {
+    console.error("Error fetching average ratings:", error);
+  }
+};
+
   
+
   const fetchOrdersAndCalculateCounts = async () => {
     try {
       const response = await axios.get("https://localhost:7247/api/Orders");
@@ -25,12 +46,9 @@ function Dashboard(props) {
       ordersData.forEach((order) => {
         if (order.isApproved) {
           const bookId = order.bookId;
-          calculatedApprovedCounts[bookId] =(calculatedApprovedCounts[bookId] || 0) + 1;
-          if (
-            !calculatedReturnTimes[bookId] ||
-            order.retrunOn < calculatedReturnTimes[bookId]
-          ) {
-            calculatedReturnTimes[bookId] = order.retrunOn;
+          calculatedApprovedCounts[bookId] = (calculatedApprovedCounts[bookId] || 0) + 1;
+          if (!calculatedReturnTimes[bookId] || order.returnOn < calculatedReturnTimes[bookId]) {
+            calculatedReturnTimes[bookId] = order.returnOn;
           }
         }
       });
@@ -48,22 +66,21 @@ function Dashboard(props) {
       console.error("Error fetching books:", error);
     }
   };
+  const isLoggedIn = !!localStorage.getItem("token");
   const handleApplyClick = (bookId, bookTitle) => {
     setSelectedBookId(bookId);
     setSelectedBookTitle(bookTitle);
-    if(isLoggedIn){
-    navigate(`/OrderForm`, { state: { bookId, bookTitle } });}
-    else{
-      navigate("/Login")
+    if (isLoggedIn) {
+      navigate(`/OrderForm`, { state: { bookId, bookTitle } });
+    } else {
+      navigate("/Login");
     }
   };
   const filterBooks=books.filter((e)=>e.title.toLowerCase().includes(searchQuery.toLowerCase())||e.author.toLowerCase().includes(searchQuery.toLowerCase()));
-
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "numeric", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
-  const isLoggedIn = !!localStorage.getItem("token");
   return (
     <div className="dashboard-container">
       <div style={searchBarStyle}>
@@ -102,6 +119,28 @@ function Dashboard(props) {
                     : `Available Quantity: ${ book.quantity - (approvedCounts[book.id] || 0)}`
                       }
                 </p>
+               {/* <details>
+                <summary>Give rating</summary>
+                <p><i class="fas fa-star"/><i class="fas fa-star"/><i class="fas fa-star"/><i class="fas fa-star"/><i class="fas fa-star"/></p>
+               </details> */}
+               {/* <p>Average Rating:
+               <i className="fas fa-star" /> {average[book.id] ? `${average[book.id].toFixed(1)}/5` : "Waiting for rating"}
+               </p> */}
+
+               <p>
+ 
+  {average[book.id] ? (
+    <>
+    Average Rating:
+    {new Array(5).fill().map((_, index) => (
+  <i
+    key={index}
+    className={`fas fa-star ${index < Math.round(average[book.id]) ? "star-filled" : "star-empty"}`}
+  />
+))}
+    </>
+  ) :""}
+</p>
                 <div className="book-buttons">
                   {
                     book.quantity - (approvedCounts[book.id] || 0) > 0 && (
@@ -110,6 +149,7 @@ function Dashboard(props) {
                       </button>
                     )}
                 </div>
+               
               </div>
             </div>
           ))
@@ -191,3 +231,10 @@ const applybutton = {
  paddingRight:"20px",
   };
 export default Dashboard;
+ 
+
+  
+
+
+
+

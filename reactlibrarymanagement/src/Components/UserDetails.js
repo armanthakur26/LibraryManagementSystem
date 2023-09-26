@@ -19,6 +19,7 @@ const UserDetails = () => {
         })
         .then((response) => {
           setUser(response.data);
+          console.log(response.data);
         })
         .catch((error) => {
           console.error('Error fetching user details:', error);
@@ -26,7 +27,6 @@ const UserDetails = () => {
         });
     }
   }, [token]);
-
   const getUserTypeLabel = (userType) => {
     switch (userType) {
       case 0:
@@ -39,7 +39,6 @@ const UserDetails = () => {
         return 'Unknown';
     }
   };
-
   return (
     <div style={styles.container}>
       <div style={styles.background}></div>

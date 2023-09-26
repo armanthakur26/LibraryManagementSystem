@@ -59,9 +59,6 @@ function App() {
         }
         return false;
       };
-     
- 
-
   return (
     <div>
        <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -100,10 +97,7 @@ function App() {
                   Contact
                 </Link>
 
-              </li>
-             
-
-              
+              </li>                 
               {isAdmin() && (
                 <>
                   <li className="nav-item">
@@ -118,14 +112,12 @@ function App() {
                   </li>
                   <li className="nav-item">
                 <Link className="nav-link" to={"/AllOrders"}>
-                <i class="fas fa-duotone fa-clipboard fa-shake"></i>  Order Request
+                <i class="fas fa-duotone fa-clipboard"></i>  Order Request
                 </Link>
               </li>
                 </>
               )}
 
-              
-            
               {isLoggedIn &&
               <li className="nav-item">
                 <Link className="nav-link" to={"/MyOrder"}>
@@ -199,8 +191,7 @@ function App() {
                <Route path="/Books" element={<Books />} />
                <Route path={ROUTES.book.name} element={ROUTES.book.component} />
              </>
-           )}
-        
+           )}s
            <Route path={ROUTES.dashboard.name} element={ROUTES.dashboard.component} />
            <Route path="/User" element={<User />} />
            <Route path="/PasswordSetting" element={<PasswordSetting />} />

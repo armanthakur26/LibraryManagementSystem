@@ -41,17 +41,6 @@ namespace LibraryManagementSystemTask.Controllers
         [HttpPut]
         public IActionResult UpdateBook([FromBody] Books books)
         {
-            //if (books == null) return BadRequest(ModelState);
-            //if (!_books.Booksexists(books.id)) return NotFound();
-            //if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            //if (!_books.UpdateBooks(books))
-            //{
-            //    ModelState.AddModelError("", $"something went wrong while save data:{books.Title}");
-            //    return StatusCode(StatusCodes.Status500InternalServerError);
-            //}
-            //return NoContent();
-
             if (books == null) return BadRequest();
             if (!ModelState.IsValid) return BadRequest();
             _books.UpdateBook(books);
@@ -73,3 +62,4 @@ namespace LibraryManagementSystemTask.Controllers
         }
     }
 }
+         

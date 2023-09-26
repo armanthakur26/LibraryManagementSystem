@@ -6,7 +6,7 @@ function Book() {
   const [editBookId, setEditBookId] = useState(null);
   const [editForm, setEditForm] = useState({
     title: '',
-    author: '',
+    author:'',
     price: '',
     ordered: false,
     category: '',
@@ -65,11 +65,9 @@ const imagestyleshow={
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
     const reader = new FileReader();
-
     reader.onloadend = () => {
       setEditForm({ ...editForm, image: reader.result });
     };
-
     if (imageFile) {
       reader.readAsDataURL(imageFile);
     }
@@ -128,11 +126,9 @@ const imagestyleshow={
   const handleAddImageChange = (event) => {
     const imageFile = event.target.files[0];
     const reader = new FileReader();
-
     reader.onloadend = () => {
       setAddForm({ ...addForm, image: reader.result });
     };
-
     if (imageFile) {
       reader.readAsDataURL(imageFile);
     }
@@ -164,7 +160,6 @@ const imagestyleshow={
               value={addForm.author}
               onChange={handleAddInputChange}
               className="form-control"
-        
             />
           </div>
           <div className="form-group">
@@ -179,7 +174,7 @@ const imagestyleshow={
             />
           </div>
           <div className="form-group">
-            <label >Category ID</label>
+            <label >Book Category</label>
             <input
               type="text"
               name="category"
@@ -192,7 +187,7 @@ const imagestyleshow={
           <div className="form-group">
             <label > Quantity :</label>
             <input
-              type="text"
+              type="number"
               name="quantity"
               value={addForm.quantity}
               onChange={handleAddInputChange}
@@ -258,7 +253,7 @@ const imagestyleshow={
                     <label> Author</label>
                     <input
                       type="text"
-                      name="Author"
+                      name="author"
                       value={editForm.author}
                       onChange={handleInputChange}
                       className="form-control"
@@ -278,7 +273,7 @@ const imagestyleshow={
                     <label> Category</label>
                     <input
                       type="text"
-                      name="Author"
+                      name="category"
                       value={editForm.category}
                       onChange={handleInputChange}
                       className="form-control"

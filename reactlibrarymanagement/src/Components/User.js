@@ -20,7 +20,6 @@ const UserList = () => {
     if (blockedUntil && now < new Date(blockedUntil)) {
       return 'Blocked'; 
     }
-
     switch (userType) {
       case 0:
         return 'Student';
@@ -100,7 +99,7 @@ const UserList = () => {
             <th>Created On</th>
             <th>User Type</th>
             <th>Change Role</th>
-            <th>Block/Unblock</th> {/* New table header for blocking/unblocking */}
+            <th>Block/Unblock</th>
           </tr>
         </thead>
         <tbody>

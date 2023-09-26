@@ -12,21 +12,18 @@ const RegistrationForm = () => {
     event.preventDefault();
 
     try {
+      registeruser()
       const response = await axios.post('https://localhost:7247/api/User/register', {
         firstName,
         lastName,
         email,
         mobile
       });
-
       console.log(response.data);
-    
-      registeruser()
+     
     } catch (error) {
-      console.error('Registration failed:', error.response?.data?.message || 'Unknown error');
+      console.error('Registration failed email duplicate:', error.response?.data?.message || 'Unknown error');
       emailAlert();
-    
-
     }
   };
  

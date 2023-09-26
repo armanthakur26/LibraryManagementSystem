@@ -10,6 +10,7 @@ namespace LibraryManagementSystemTask.Data
         public DbSet<Books> books { get; set; }
         public DbSet<User> users { get; set; }  
        public DbSet<Orders> Allorders { get; set; }
+        public DbSet<Booksrating> booksratings { get; set; }
 
 
         public override int SaveChanges()

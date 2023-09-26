@@ -137,40 +137,7 @@ namespace LibraryManagementSystemTask.Controllers
 
             return BadRequest();
         }
-        //[HttpPut("{id}")]
-        //public IActionResult UpdateOrder(int id, ordersdto orderDto)
-        //{
-        //    if (id != orderDto.Id || !ModelState.IsValid)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    var order = _orderrepository.GetTrail(id);
-        //    if (order == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    order.bookId = orderDto.bookId;
-        //    order.userId = orderDto.userId;
-        //    order.CreatedOn = orderDto.CreatedOn;
-        //    order.RetrunOn = orderDto.RetrunOn;
-        //    order.Count = orderDto.Count;
-        //    order.IsApproved = orderDto.IsApproved;
-        //    var minus = _books.GetBook(order.bookId);
-        //    if (minus != null)
-        //    {
-        //        minus.AvilableQuantity--;
-        //        _books.UpdateBook(minus);
-        //    }
-
-        //    if (_orderrepository.updatetrail(order))
-        //    {
-        //        return NoContent();
-        //    }
-
-        //    return BadRequest();
-        //}
+       
         [HttpDelete("{id}")]
         public IActionResult DeleteOrder(int id)
         {
@@ -189,29 +156,6 @@ namespace LibraryManagementSystemTask.Controllers
             return BadRequest();
         }
 
-        //[HttpDelete("{id}")]
-        //public IActionResult DeleteOrder(int id)
-        //{
-        //    var order = _orderrepository.GetTrail(id);
-        //    if (order == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var add = _books.GetBook(order.bookId);
-        //    if (add != null)
-        //    {
-        //        add.AvilableQuantity++;
-        //        _books.UpdateBook(add);
-        //    }
-        //    if (_orderrepository.deletetrail(order))
-        //    {
-
-        //        return NoContent();
-        //    }
-
-        //    return BadRequest();
-        //}
 
 
     }

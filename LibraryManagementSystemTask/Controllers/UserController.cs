@@ -1,6 +1,4 @@
 ﻿using LibraryManagementSystemTask.Data;
-using LibraryManagementSystemTask.Data.Migrations;
-using LibraryManagementSystemTask.Migrations;
 using LibraryManagementSystemTask.Models;
 using LibraryManagementSystemTask.Models.ViewModels;
 using LibraryManagementSystemTask.Repository;
@@ -31,7 +29,7 @@ namespace LibraryManagementSystemTask.Controllers
             _configuration = configuration;
             _emailSender = emailSender;
         }
-        [HttpPost("register")]
+        [HttpPost("register")]  
         public async Task<IActionResult> Register([FromBody] User user)
         {
             if (ModelState.IsValid)
@@ -52,15 +50,12 @@ namespace LibraryManagementSystemTask.Controllers
                     }
             return Ok();
         }
-
         [HttpGet("getalluser")]
         public IActionResult GetAllUser()
         {
             var userlist = _context.users.ToList();
             return Ok(userlist);
         }
-    
-
         [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, [FromBody] User user)
         {
@@ -89,17 +84,17 @@ namespace LibraryManagementSystemTask.Controllers
             if (user == null) return BadRequest("wrong user/pwd");
             return Ok(user);
         }
-        public static string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-                return hash;
-            }
+        //public static string HashPassword(string password)
+        //{
+        //    using (var sha256 = SHA256.Create())
+        //    {
+        //        var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+        //        var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+        //        return hash;
+        //    }
 
 
-        }
+        //}
         //[HttpPut("Update")]
         //public IActionResult SetPassWord([FromBody] User user)
         //{

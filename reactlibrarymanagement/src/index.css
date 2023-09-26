@@ -171,3 +171,29 @@ code {
   justify-content: space-between;
   margin-top: 20px;
 }
+.star-filled {
+  color: rgb(238, 205, 19);
+}
+
+.star-empty {
+  color: #ccc; 
+}
+.rating-stars {
+  display: flex;
+  align-items: center;
+}
+
+.star-icon {
+  font-size: 1.5rem;
+  margin-right: 5px;
+  cursor: pointer;
+ 
+}
+
+.star-icon.selected {
+  color: #ffcc00; 
+
+}
+.star-icon.unselected {
+  color: #a5a4a3; 
+}

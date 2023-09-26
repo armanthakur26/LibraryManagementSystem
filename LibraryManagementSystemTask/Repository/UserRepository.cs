@@ -1,5 +1,4 @@
 ﻿using LibraryManagementSystemTask.Data;
-using LibraryManagementSystemTask.Migrations;
 using LibraryManagementSystemTask.Models;
 using LibraryManagementSystemTask.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;

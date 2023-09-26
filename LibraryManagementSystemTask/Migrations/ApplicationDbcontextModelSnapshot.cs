@@ -63,6 +63,32 @@ namespace LibraryManagementSystemTask.Migrations
                     b.ToTable("books");
                 });
 
+            modelBuilder.Entity("LibraryManagementSystemTask.Models.Booksrating", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<int>("BooksratingValue")
+                        .HasColumnType("int");
+
+                    b.Property<int>("bookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("bookId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("booksratings");
+                });
+
             modelBuilder.Entity("LibraryManagementSystemTask.Models.Orders", b =>
                 {
                     b.Property<int>("Id")
@@ -147,6 +173,25 @@ namespace LibraryManagementSystemTask.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users");
+                });
+
+            modelBuilder.Entity("LibraryManagementSystemTask.Models.Booksrating", b =>
+                {
+                    b.HasOne("LibraryManagementSystemTask.Models.Books", "book")
+                        .WithMany()
+                        .HasForeignKey("bookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LibraryManagementSystemTask.Models.User", "users")
+                        .WithMany()
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("book");
+
+                    b.Navigation("users");
                 });
 
             modelBuilder.Entity("LibraryManagementSystemTask.Models.Orders", b =>
